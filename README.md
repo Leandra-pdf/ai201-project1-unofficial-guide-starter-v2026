@@ -94,30 +94,31 @@ Best time to do laundry here is Tuesday or Wednesday morning. Sunday after 6pm y
 
 ## Sample Answer
 
-<!-- One complete question and answer, pasted as text, with the source line
-     visible. Milestone 4. -->
-
 **Question:**
+How long is the add/drop course window period?
 
 **Answer:**
+You can add a course through the end of the second week, and you can drop a course through the end of week six. 
 
-```
-```
+Source: admin_add_drop_deadline.txt
+
+Sources retrieved: admin_add_drop_deadline.txt, advising_registration.txt, course_biol_160.txt, course_biol_160_workload.txt, transit_shuttle.txt
 
 **My relevance cutoff:**
 
-<!-- The number you set in config.py, and how you got there.
+I left the relevance cutoff at `0.6` based on two key observations from my test runs. First, out-of-scope questions yielded high distance scores (ranging from 0.80 to 0.93), creating a  separation from our in-scope corpus questions. Second, keeping the threshold at 0.6 provides a safe margin for questions where the exact answer isn't always explicitly stated in a single phrase. This way the retriever captures relevant context without triggering unnecessary false-positive refusals.
 
-     You ran five questions your corpus covers and the five in OUT_OF_SCOPE
-     that it clearly doesn't, and wrote down the best distance for each. What
-     did those two groups look like? Where was the gap? Put the actual numbers
-     here — the table below wants all ten rows.
-
-     Milestone 4. -->
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-|  |  |  |
+| How long by bike does it take to get to campus? | Yes | 0.412 |
+| How long is the add/drop course window period? | Yes | 0.317 |
+| Roughly how many pages of reading per week are assigned in HIST 118? | Yes | 0.209 |
+| What is the capital of Mongolia? | No | 0.825 |
+| How do I change the oil in a diesel engine? | No | 0.934 |
+| Who won the 1994 World Cup? | No | 0.886 |
+| What is the recommended dosage of ibuprofen for a headache? | No | 0.803 |
+| How do I write a for loop in Rust? | No | 0.877 |
 
 ## How I Used AI
 
