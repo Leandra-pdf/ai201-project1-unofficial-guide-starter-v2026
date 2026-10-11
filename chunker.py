@@ -59,45 +59,78 @@ def fallback_split(
     if overlap >= chunk_size:
         raise ValueError("overlap has to be smaller than chunk_size")
 
-    chunks: list[Chunk] = []
-    for doc in documents:
-        start = 0
-        index = 0
-        while start < len(doc.text):
-            piece = doc.text[start : start + chunk_size].strip()
-            if piece:
-                chunks.append(
-                    Chunk(
-                        text=piece,
-                        source=doc.source,
-                        index=index,
-                        produced_by="chunker.py::fallback_split",
-                    )
-                )
-                index += 1
-            start += chunk_size - overlap
-
-    return chunks
-
-
 def split_documents(documents: list[Document]) -> list[Chunk]:
     """
-    Split documents into chunks. ⚠️ REPLACE THE BODY OF THIS IN MILESTONE 3.
+    Split documents into semantically coherent chunks.
 
-    Right now it just calls the fallback. That is the plain, generic behaviour
-    the brief is talking about.
+    This strategy improves upon the default fixed-size fallback by respecting 
+    natural paragraph boundaries (`\n\n`) and enforcing a minimum character 
+    length threshold. 
 
-    When you write your own strategy, set `produced_by` to
-    "chunker.py::split_documents" so your README's Sample Chunks section names
-    the right function. `app.py chunks` prints that string for you.
+    Algorithm:
+      1. Splits each document into distinct paragraph blocks.
+      2. Accumulates paragraphs sequentially, merging short text blocks 
+         (such as standalone headings or single-sentence intros) with subsequent 
+         paragraphs until the minimum length threshold (~150 characters) is met.
+      3. Handles edge cases where trailing fragments are appended to the prior 
+         chunk to maintain sentence and thought integrity.
+      4. Tags every generated chunk with 'chunker.py::split_documents'.
 
-    Things worth thinking about before you write any code:
-      - Are your documents short posts or long guides?
-      - Is the useful information in one sentence, or spread over a paragraph?
-      - Would splitting on paragraph breaks keep more thoughts intact than
-        splitting on a character count?
+    Args:
+        documents (list[Document]): The raw loaded documents from the corpus.
+
+    Returns:
+        list[Chunk]: A filtered and structured list of Chunk objects ready for embedding.
     """
-    return fallback_split(documents)
+    chunks: list[Chunk] = []
+    min_length = 150  # Matches my criteria target
+
+    for doc in documents:
+        # Split document into paragraphs
+        raw_paragraphs = [p.strip() for p in doc.text.split("\n\n") if p.strip()]
+        
+        if not raw_paragraphs:
+            continue
+
+        index = 0
+        current_chunk_text = ""
+
+        for para in raw_paragraphs:
+            # If current accumulation is empty, start with this paragraph
+            if not current_chunk_text:
+                current_chunk_text = para
+            else:
+                # If adding this paragraph keeps it reasonable, or if the current chunk is too short, combine them
+                if len(current_chunk_text) < min_length:
+                    current_chunk_text += "\n\n" + para
+                else:
+                    # Current chunk is long enough, save it and start a new one
+                    chunks.append(
+                        Chunk(
+                            text=current_chunk_text,
+                            source=doc.source,
+                            index=index,
+                            produced_by="chunker.py::split_documents",
+                        )
+                    )
+                    index += 1
+                    current_chunk_text = para
+
+        if current_chunk_text:
+            # If the very last chunk is a tiny fragment and we have previous chunks, append it to the last chunk
+            if len(current_chunk_text) < min_length and chunks and chunks[-1].source == doc.source:
+                chunks[-1].text += "\n\n" + current_chunk_text
+            else:
+                chunks.append(
+                    Chunk(
+                        text=current_chunk_text,
+                        source=doc.source,
+                        index=index,
+                        produced_by="chunker.py::split_documents",
+                    )
+                )
+
+    return chunks
 
 
 def describe(chunks: list[Chunk]) -> str:
