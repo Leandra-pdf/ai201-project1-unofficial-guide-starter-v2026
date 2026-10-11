@@ -21,26 +21,18 @@
 
 ## What This Does
 
-<!-- Three or four sentences. Which corpus you picked, and the kinds of
-     questions your system answers. Write it for someone who has never seen
-     this repo.
-
-     Milestone 5. -->
+The Unofficial Guide is an AI-powered local guide built on a specialized text corpus, designed to answer targeted questions about specific local domains, guides, or communities. Instead of relying solely on general model knowledge, it uses RAG to search through the underlying document collection and generate accurate, grounded responses. Every answer includes direct source file attributions to make sure users receive verifiable information. If a user asks a question outside the scope of the provided documents, a distance-based relevance gate automatically filters it out to prevent hallucinated answers and tells the user it doesn't have enough information to provide an answer.
 
 ## Chunking Strategy
 
-**Chunk size:**
-**Overlap:**
+**Chunk size:** 150 characters minimum (could go up to ~500 characters based on paragraph lengths) 
+**Overlap:** 0 characters (not applicable due to paragraph-boundary splitting)
 
-<!-- What about YOUR documents made you pick these numbers? Short posts and
-     long sectioned guides don't want the same chunking, and "800 seemed
-     reasonable" earns nothing. Point at something you noticed when you read
-     the documents in Milestone 1.
+During Milestone 1, I noticed that the `campus_life` corpus consists of short, self-contained student life posts and forum entries, averaging around 317 characters across 1 to 3 paragraphs. Using a fixed-size window made little sense because almost every post fit within one window which results in a 1:1 document-to-chunk mapping.
 
-     If you changed your mind partway through, say so and say why. That's worth
-     more than pretending you got it right first time.
+Initially, I tried splitting directly on paragraph double-newlines. However, this created several useless micro-chunks containing only standalone post headers.
 
-     Milestone 3. -->
+To fix this, I adjusted the strategy to dynamically accumulate paragraphs until reaching a minimum threshold of 150 characters before finalizing a chunk. This preserves natural thought boundaries, attaches brief headers directly to their underlying body text, and avoids slicing sentences in half—without needing arbitrary overlap character counts.
 
 ## Sample Chunks
 
@@ -122,18 +114,11 @@ I left the relevance cutoff at `0.6` based on two key observations from my test 
 
 ## How I Used AI
 
-<!-- Two specific moments. For each: what you asked for, what came back, and
-     what you changed about it.
+**1. Brainstorming evaluation criteria**
+I asked the AI to help me brainstorm specific targets for criteria 4 and 5. The AI suggested baseline focusing on minimum character thresholds and paragraph structures, which I then refined and customized to match my specific chunking strategy and acceptance rules.
 
-     "I asked Claude to write the chunking function from my notes. It ignored
-     the overlap, so I added that myself" is the level of detail we're after.
-     "I used AI to help me code" is not.
-
-     Milestone 5. -->
-
-**1.**
-
-**2.**
+**2. Enhancing the fallback chunking logic**
+I asked the AI to review the fallbackchunker and help me design a paragraph-aware splitting approach. The initial code draft split blindly and produced short fragment chunks, so I modified its implementation by adding a minimum character length threshold and a merging loop so that short headings stay attached to their following context blocks.
 
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
