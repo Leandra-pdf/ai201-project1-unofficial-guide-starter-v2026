@@ -122,6 +122,9 @@ I asked the AI to help me brainstorm specific targets for criteria 4 and 5. The 
 **2. Enhancing the fallback chunking logic**
 I asked the AI to review the fallbackchunker and help me design a paragraph-aware splitting approach. The initial code draft split blindly and produced short fragment chunks, so I modified its implementation by adding a minimum character length threshold and a merging loop so that short headings stay attached to their following context blocks.
 
+**3. Discussing answer length constraints**
+I used the AI to discuss the pros and cons of making the final text output character-count specific. Through our discussion, we weighed whether forcing a 150-character minimum on answers would cause padding or hallucinations for concise response, which led me to shift my focus toward standardizing citation formatting instead of forcing artificial response lengths.
+
 <!-- ── Stretch features ─────────────────────────────────────────────────────
      Doing one? Say so here BEFORE you start. A feature this README never
      claims earns nothing.
@@ -319,9 +322,6 @@ While our paragraph-aware chunker successfully maintained a minimum length thres
 
 ### Run Log — After
 
-<!-- Same format, same five criteria, three runs each.
-     `python run_eval.py --label after` -->
-
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
 | 1. Retrieved chunk contains the answer | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
@@ -336,17 +336,8 @@ Yes, it helped. The citation variance has been eliminated. Reviewing the "After"
 
 ## What's Still Broken
 
-<!-- For each criterion still missed after your fix: what you'd do about it,
-     and why you stopped where you did.
-
-     "I ran out of time" is fine if it's true. Pretending nothing is left is
-     not.
-
-     Milestone 5. -->
+All criteria passed and no functional misses remain for my current test questions. However, I stopped here primarily because I am catching up on coursework after transferring into this section, so I wanted to lock in a solid, working pipeline before moving forward.
 
 ## What I'd Do Differently
 
-<!-- Knowing what you know now — which of your five criteria would you write
-     differently, and why?
-
-     Milestone 5. -->
+Knowing what I know now, I would write the generation prompts differently to handle edge cases where partial information is retrieved. Specifically, rather than returning a  refusal when information isn't completely explicit, I would refine the system prompt to provide helpful contextual synthesis or partial answers when available, reserving hard refusals solely for unrelated or out of scope queries.
