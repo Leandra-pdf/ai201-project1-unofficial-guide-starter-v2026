@@ -49,9 +49,9 @@ This target checks whether the system can recognize when it does not have enough
 
 ---
 
-## 4. Something about your chunks
+## 4. Chunks maintain minimum length threshold
 
-No generated chunk is shorter 200 than characters, ensuring that  enough context is provided to contain answers.
+No generated chunk is shorter 150 than characters, ensuring that  enough context is provided to contain answers.
 
 
 **Why this target:** 
@@ -60,7 +60,7 @@ Setting a minimum chunk length helps prevent the system from creating fragments 
 
 ---
 
-## 5. Your choice
+## 5. Chunks avoid splitting mid-sentence
 
 At least 4 out of 5 randomly sampled chunks from the index, sentences are not artificially split across chunk boundaries at either the start or the end.
 

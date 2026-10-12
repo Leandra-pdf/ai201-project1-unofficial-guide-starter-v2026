@@ -131,33 +131,168 @@ I asked the AI to review the fallbackchunker and help me design a paragraph-awar
 
 # Unit 2
 
-<!-- These sections get ADDED to what's already above. Don't delete or rewrite
-     unit 1 — the point is that someone can see what you said before you knew
-     how it went. -->
-
 ## Run Log — Before
 
-<!-- Your five criteria, three runs each. `python run_eval.py --label before`
-     runs the questions, puts the OUT_OF_SCOPE ones through the gate, and
-     writes it all into results/ for you. Targets come from criteria.md; the
-     verdict column is your call.
-
-     Criterion 3 is measured in one deterministic pass rather than three, so
-     the same number goes in all three run columns. That's correct, not lazy.
-
-     Milestone 1. -->
 
 | Criterion | Target | Run 1 | Run 2 | Run 3 | Verdict |
 |---|---|---|---|---|---|
-| 1. Retrieved chunk contains the answer | 4 of 5 |  |  |  |  |
-| 2. Every answer names a source | 5 of 5 |  |  |  |  |
-| 3. Gate stops out-of-corpus questions | 4 of 5 |  |  |  |  |
-| 4. | | | | | |
-| 5. | | | | | |
+| 1. Retrieved chunks contain the answer | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 2. Every answer names a source | 5 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 3. The relevance gate stops out-of-corpus questions | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 4. Chunks maintain minimum length threshold | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
+| 5. Chunks avoid splitting mid-sentence | 4 of 5 | 5/5 | 5/5 | 5/5 | MET |
 
-<!-- Underneath, paste the REAL output for each criterion from one of your
-     runs — the actual text your system produced, not a description of it.
-     Name the file and function that produced it. -->
+## Real output
+
+### What time should students visit Pellew Dining Hall to avoid peak wait times? — run 1
+
+- Best distance: 0.2360 (passed the gate)
+- Sources retrieved: dining_halden_hall.txt, dining_halden_hall_followup.txt, dining_pellew_dining_hall.txt, dining_pellew_dining_hall_followup.txt, dining_the_ridgeway_cafe_followup.txt
+
+```
+To avoid peak wait times at Pellew Dining Hall, students should go before 11:45 (`dining_pellew_dining_hall_followup.txt` and `dining_pellew_dining_hall.txt`).
+```
+
+### What time should students visit Pellew Dining Hall to avoid peak wait times? — run 2
+
+- Best distance: 0.2360 (passed the gate)
+- Sources retrieved: dining_halden_hall.txt, dining_halden_hall_followup.txt, dining_pellew_dining_hall.txt, dining_pellew_dining_hall_followup.txt, dining_the_ridgeway_cafe_followup.txt
+
+```
+To avoid peak wait times at Pellew Dining Hall, students should go before 11:45 (`dining_pellew_dining_hall_followup.txt` and `dining_pellew_dining_hall.txt`).
+```
+
+### What time should students visit Pellew Dining Hall to avoid peak wait times? — run 3
+
+- Best distance: 0.2360 (passed the gate)
+- Sources retrieved: dining_halden_hall.txt, dining_halden_hall_followup.txt, dining_pellew_dining_hall.txt, dining_pellew_dining_hall_followup.txt, dining_the_ridgeway_cafe_followup.txt
+
+```
+To avoid peak wait times at Pellew Dining Hall, students should go before 11:45 (`dining_pellew_dining_hall.txt` and `dining_pellew_dining_hall_followup.txt`).
+```
+
+### How long is the add/drop course window period? — run 1
+
+- Best distance: 0.3166 (passed the gate)
+- Sources retrieved: admin_add_drop_deadline.txt, advising_registration.txt, course_biol_160.txt, course_biol_160_workload.txt, transit_shuttle.txt
+
+```
+You can add a course through the end of the second week, and dropping is allowed through the end of week six. 
+
+Source: admin_add_drop_deadline.txt
+```
+
+### How long is the add/drop course window period? — run 2
+
+- Best distance: 0.3166 (passed the gate)
+- Sources retrieved: admin_add_drop_deadline.txt, advising_registration.txt, course_biol_160.txt, course_biol_160_workload.txt, transit_shuttle.txt
+
+```
+You can add a course through the end of the second week, and dropping is allowed through the end of week six. 
+
+Source: admin_add_drop_deadline.txt
+```
+
+### How long is the add/drop course window period? — run 3
+
+- Best distance: 0.3166 (passed the gate)
+- Sources retrieved: admin_add_drop_deadline.txt, advising_registration.txt, course_biol_160.txt, course_biol_160_workload.txt, transit_shuttle.txt
+
+```
+You can add a course through the end of the second week, and dropping is allowed through the end of week six. 
+
+Source: admin_add_drop_deadline.txt
+```
+
+### What is the worst day to do laundry in Morrow House? — run 1
+
+- Best distance: 0.3686 (passed the gate)
+- Sources retrieved: housing_aldridge_hall_laundry.txt, housing_innisfree_hall_laundry.txt, housing_morrow_house.txt, housing_morrow_house_laundry.txt, housing_old_brewhouse_laundry.txt
+
+```
+Based on the documents, the worst time to do laundry is Sunday after 6 pm, when you will have to wait due to backed-up dryers. 
+
+Source: `housing_morrow_house_laundry.txt`
+```
+
+### What is the worst day to do laundry in Morrow House? — run 2
+
+- Best distance: 0.3686 (passed the gate)
+- Sources retrieved: housing_aldridge_hall_laundry.txt, housing_innisfree_hall_laundry.txt, housing_morrow_house.txt, housing_morrow_house_laundry.txt, housing_old_brewhouse_laundry.txt
+
+```
+Based on the documents, the worst time to do laundry is Sunday after 6pm, as you will have to wait (housing_morrow_house_laundry.txt).
+```
+
+### What is the worst day to do laundry in Morrow House? — run 3
+
+- Best distance: 0.3686 (passed the gate)
+- Sources retrieved: housing_aldridge_hall_laundry.txt, housing_innisfree_hall_laundry.txt, housing_morrow_house.txt, housing_morrow_house_laundry.txt, housing_old_brewhouse_laundry.txt
+
+```
+The worst time to do laundry is Sunday after 6pm, because you will have to wait (housing_morrow_house_laundry.txt).
+```
+
+### Does North Kitchen close before Verrill Street Grill? — run 1
+
+- Best distance: 0.3553 (passed the gate)
+- Sources retrieved: dining_halden_hall.txt, dining_north_kitchen.txt, dining_north_kitchen_followup.txt, dining_verrill_street_grill.txt, dining_verrill_street_grill_followup.txt
+
+```
+Yes, North Kitchen closes at 7:00pm on weekdays (dining_north_kitchen.txt), whereas Verrill Street Grill is open until 1:00am daily during term (dining_verrill_street_grill.txt).
+```
+
+### Does North Kitchen close before Verrill Street Grill? — run 2
+
+- Best distance: 0.3553 (passed the gate)
+- Sources retrieved: dining_halden_hall.txt, dining_north_kitchen.txt, dining_north_kitchen_followup.txt, dining_verrill_street_grill.txt, dining_verrill_street_grill_followup.txt
+
+```
+Yes, North Kitchen closes at 7:00pm on weekdays (`dining_north_kitchen.txt`), whereas Verrill Street Grill is open until 1:00am daily during term (`dining_verrill_street_grill.txt`).
+```
+
+### Does North Kitchen close before Verrill Street Grill? — run 3
+
+- Best distance: 0.3553 (passed the gate)
+- Sources retrieved: dining_halden_hall.txt, dining_north_kitchen.txt, dining_north_kitchen_followup.txt, dining_verrill_street_grill.txt, dining_verrill_street_grill_followup.txt
+
+```
+Yes, North Kitchen closes at 7:00pm on weekdays (`dining_north_kitchen.txt`), whereas Verrill Street Grill is open until 1:00am daily during term (`dining_verrill_street_grill.txt`).
+```
+
+### Roughly how many pages of reading per week are assigned in HIST 118 Modern World History? — run 1
+
+- Best distance: 0.2091 (passed the gate)
+- Sources retrieved: course_engl_205_workload.txt, course_hist_118.txt, course_hist_118_exams.txt, course_hist_118_workload.txt
+
+```
+Roughly 120 pages of reading per week are assigned in HIST 118 Modern World History. 
+
+Sources: `course_hist_118_workload.txt` and `course_hist_118.txt`.
+```
+
+### Roughly how many pages of reading per week are assigned in HIST 118 Modern World History? — run 2
+
+- Best distance: 0.2091 (passed the gate)
+- Sources retrieved: course_engl_205_workload.txt, course_hist_118.txt, course_hist_118_exams.txt, course_hist_118_workload.txt
+
+```
+HIST 118 Modern World History assigns about 120 pages of reading per week. 
+
+Source: `course_hist_118_workload.txt` (also mentioned in `course_hist_118.txt`)
+```
+
+### Roughly how many pages of reading per week are assigned in HIST 118 Modern World History? — run 3
+
+- Best distance: 0.2091 (passed the gate)
+- Sources retrieved: course_engl_205_workload.txt, course_hist_118.txt, course_hist_118_exams.txt, course_hist_118_workload.txt
+
+```
+Roughly 120 pages of reading per week are assigned in HIST 118 Modern World History. 
+
+Sources: `course_hist_118_workload.txt` and `course_hist_118.txt`.
+```
+
 
 ## Verdicts
 
