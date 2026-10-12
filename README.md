@@ -307,32 +307,15 @@ Sources: `course_hist_118_workload.txt` and `course_hist_118.txt`.
 
 ## Diagnoses
 
-<!-- For each miss: which stage caused it, and how. The stage alone isn't
-     enough — you need the mechanism.
-
-     Not a diagnosis: "Question 3 didn't work."
-     A diagnosis:     "Question 3 asks about laundry costs. The answer is in
-                       one sentence that got split across two chunks, so
-                       neither chunk on its own contains it."
-
-     The five stages: loading → chunking → embedding → retrieval → generation.
-
-     Look for a pattern. If three misses all ask about numbers, that's one
-     problem, not three.
-
-     Missed nothing? Say so, then say honestly whether your targets were set
-     low, and which one you'd tighten and to what.
-
-     Milestone 3. -->
+Since all criteria passed cleanly across all three evaluation runs, there were no functional misses to diagnose. However, if I had to tighten a target, I would refine Criterion 4 to enforce a strict content-only minimum length.
 
 ## The Improvement
 
 **What I changed:**
+Tightened Criterion 4 from a general 150-character minimum chunk size to: *"No generated chunk has a core text body shorter than 150 characters, excluding any appended source name or file path metadata."*
 
 **Why I picked it:**
-
-<!-- Connect it to a specific diagnosis above in one sentence. If you can't,
-     you picked a fix because it sounded impressive. -->
+While our paragraph-aware chunker successfully maintained a minimum length threshold, evaluating total character counts can occasionally allow short text fragments if metadata strings inflate the overall metric. Tightening this ensures that the actual textual content consistently provides enough context for generation.
 
 ### Run Log — After
 

@@ -49,14 +49,16 @@ This target checks whether the system can recognize when it does not have enough
 
 ---
 
-## 4. Chunks maintain minimum length threshold
+## 4. Chunks maintain minimum length threshold (EXCLUDING file metadata)
 
-No generated chunk is shorter 150 than characters, ensuring that  enough context is provided to contain answers.
-
+No generated chunk has a core text body shorter than 150 characters, excluding any appended source name or file path metadata.
 
 **Why this target:** 
 
 Setting a minimum chunk length helps prevent the system from creating fragments that are too short to provide meaningful context. Enough context can help the retrieval process find relevant information and generate more complete answers.
+
+> **Why updated:** 
+> Although the initial evaluation passed well, measuring total character counts risked including file paths and source name strings rather than actual semantic content. This revision tightens the metric to ensure that the text body itself—independent of metadata maintains the 150-character floor for reliable retrieval context.
 
 ---
 
