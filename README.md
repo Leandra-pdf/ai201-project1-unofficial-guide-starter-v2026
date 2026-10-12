@@ -310,7 +310,7 @@ Sources: `course_hist_118_workload.txt` and `course_hist_118.txt`.
 
 ## Diagnoses
 
-Since all criteria passed cleanly across all three evaluation runs, there were no functional misses to diagnose. However, if I had to tighten a target, I would refine Criterion 4 to enforce a strict content-only minimum length.
+Since all criteria passed cleanly across all three evaluation runs, there were no functional misses to diagnose. However, if I had to tighten a target, I would refine Criterion 4 to be more about output formatting.
 
 ## The Improvement
 
