@@ -340,4 +340,4 @@ All criteria passed and no functional misses remain for my current test question
 
 ## What I'd Do Differently
 
-Knowing what I know now, I would write the generation prompts differently to handle edge cases where partial information is retrieved. Specifically, rather than returning a  refusal when information isn't completely explicit, I would refine the system prompt to provide helpful contextual synthesis or partial answers when available, reserving hard refusals solely for unrelated or out of scope queries.
+I would write the generation prompts differently to handle edge cases where partial information is retrieved. Specifically, rather than returning a  refusal when information isn't completely explicit, I would refine the system prompt to provide helpful contextual synthesis or partial answers when available, reserving hard refusals solely for unrelated or out of scope queries.
