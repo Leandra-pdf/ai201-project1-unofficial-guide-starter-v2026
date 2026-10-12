@@ -103,9 +103,11 @@ I left the relevance cutoff at `0.6` based on two key observations from my test 
 
 | Question | In corpus? | Best distance |
 |---|---|---|
-| How long by bike does it take to get to campus? | Yes | 0.412 |
+| What time should students visit Pellew Dining Hall to avoid peak wait times? | Yes | 0.236 |
 | How long is the add/drop course window period? | Yes | 0.317 |
-| Roughly how many pages of reading per week are assigned in HIST 118? | Yes | 0.209 |
+| What is the worst day to do laundry in Morrow House? | Yes | 0.369 |
+| Does North Kitchen close before Verrill Street Grill? | Yes | 0.355 |
+| Roughly how many pages of reading per week are assigned in HIST 118 Modern World History? | Yes | 0.209 |
 | What is the capital of Mongolia? | No | 0.825 |
 | How do I change the oil in a diesel engine? | No | 0.934 |
 | Who won the 1994 World Cup? | No | 0.886 |
