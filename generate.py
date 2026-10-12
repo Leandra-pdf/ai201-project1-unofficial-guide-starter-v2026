@@ -297,7 +297,9 @@ def build_prompt(question: str, results) -> str:
     return (
         f"Documents:\n\n{context}\n\n"
         f"---\n\nQuestion: {question}\n\n"
-        f"Answer using only the documents above, and name the file you used."
+        f"Answer using only the documents above. At the very end of your response, "
+        f"always cite the file(s) you used on a new line in this exact format:\n"
+        f"Source: file1.txt, file2.txt (or file1.txt if only one)"
     )
 
 

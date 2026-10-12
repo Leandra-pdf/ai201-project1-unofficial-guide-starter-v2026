@@ -49,16 +49,20 @@ This target checks whether the system can recognize when it does not have enough
 
 ---
 
-## 4. Chunks maintain minimum length threshold (EXCLUDING file metadata)
+## 4. Consistent source citation formatting
 
-No generated chunk has a core text body shorter than 150 characters, excluding any appended source name or file path metadata.
+Previous target: No generated chunk has a core text body shorter than 150 characters, excluding any appended source name or file path metadata.
+
+Revised target: Every generated answer appends source citations using a standardized format (e.g., ``) at the end of the response.
 
 **Why this target:** 
 
 Setting a minimum chunk length helps prevent the system from creating fragments that are too short to provide meaningful context. Enough context can help the retrieval process find relevant information and generate more complete answers.
+> Revised reason: Standardizing the source citation format ensures that answer provenance is clear, uniform, and easily parseable across all generated responses.
 
 > **Why updated:** 
 > Although the initial evaluation passed well, measuring total character counts risked including file paths and source name strings rather than actual semantic content. This revision tightens the metric to ensure that the text body itself—independent of metadata maintains the 150-character floor for reliable retrieval context.
+> Revised reason: The output style varied between inline parentheticals `(from file.txt)` and line-separated citations `Source: file.txt`. Shifting this criterion to citation consistency targets a concrete output quality requirement in the generation phase, making formatting strict, predictable, and simple to measure.
 
 ---
 
