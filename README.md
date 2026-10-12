@@ -296,22 +296,14 @@ Sources: `course_hist_118_workload.txt` and `course_hist_118.txt`.
 
 ## Verdicts
 
-<!-- MET or MISSED for each of the five, against the target you wrote last
-     unit — not a new one. Plus a sentence on how you decided. That sentence
-     matters most where it was close.
-
-     If your target said 4 of 5 and your runs came out 4, 3, 4, that's a MISS.
-     The target has to hold, not show up occasionally.
-
-     Milestone 2. -->
-
 | # | Criterion | Verdict | How I decided |
 |---|---|---|---|
-| 1 |  |  |  |
-| 2 |  |  |  |
-| 3 |  |  |  |
-| 4 |  |  |  |
-| 5 |  |  |  |
+| 1 | Retrieved chunks contain the answer | MET |All 5 test questions successfully retrieved chunks containing the correct/relevant answers across for every pass. |  |
+| 2 | Every answer names a source | MET | All of the generated answers across all three runs explicitly cited their source file names. |  |
+| 3 | The relevance gate stops out-of-corpus questions | MET | The distance-based relevance gate successfully blocked all 5 out-of-scope questions with high distance scores (0.80+), meeting the 4 of 5 target. |  |
+| 4 | Chunks maintain minimum length threshold | MET | Using an online word counter, I manually checked that each output is at least 150 characters long. |  |
+| 5 | Chunks avoid splitting mid-sentence | MET | Manual inspection of randomly sampled index chunks showed that natural paragraph boundaries were preserved without truncating sentences mid-way. |  |
+
 
 ## Diagnoses
 
